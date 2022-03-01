@@ -1,4 +1,3 @@
-import { login } from "auth-provider";
 import { useAuth } from "context/auth-context";
 import React, { FormEvent } from "react";
 
