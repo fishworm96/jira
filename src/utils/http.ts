@@ -17,7 +17,7 @@ export const http = async (
     method: "GET",
     headers: {
       Authorization: token ? `Bearer ${token}` : "",
-      "Content-Type": data ? "application/jsion" : "",
+      "Content-Type": data ? "application/json" : "",
     },
     ...customConfig,
   };
@@ -31,7 +31,6 @@ export const http = async (
   return window.fetch(`${apiUrl}/${endpoint}`, config).then(async (res) => {
     if (res.status === 401) {
       await auth.logout();
-      window.location.reload();
       return Promise.reject({ message: "请重新登录" });
     }
     const data = await res.json();

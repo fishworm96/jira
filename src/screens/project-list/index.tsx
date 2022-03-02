@@ -20,13 +20,6 @@ export const ProjectListScreen = () => {
 
   useEffect(() => {
     client("projects", { data: cleanObject(debounceParam) }).then(setList);
-    fetch(
-      `${apiUrl}/projects?${qs.stringify(cleanObject(debounceParam))}`
-    ).then(async (response) => {
-      if (response.ok) {
-        setList(await response.json());
-      }
-    });
   }, [debounceParam]);
 
   useMount(() => {
