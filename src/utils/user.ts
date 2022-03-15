@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { cleanObject } from "utils/index";
 import { useAsync } from "utils/use-async";
-import { Project } from "screens/project-list/list";
 import { useHttp } from "./http";
 import { User } from "screens/project-list/search-panel";
 
