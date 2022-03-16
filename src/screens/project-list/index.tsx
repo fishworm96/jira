@@ -7,14 +7,11 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
+import { useUrlQueryParam } from "utils/url";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
-
-  const [param, setParam] = useState({
-    name: "",
-    personId: "",
-  });
+  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
   const debounceParam = useDebounce(param, 200);
   const client = useHttp();
   const { isLoading, error, data: list } = useProject(debounceParam);
@@ -31,6 +28,8 @@ export const ProjectListScreen = () => {
     </Container>
   );
 };
+
+ProjectListScreen.WhyDidYouRedner = false;
 
 const Container = styled.div`
   padding: 3.2rem;
