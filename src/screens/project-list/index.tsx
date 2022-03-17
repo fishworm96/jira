@@ -7,14 +7,13 @@ import styled from "@emotion/styled";
 import { Typography } from "antd";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
-import { useUrlQueryParam } from "utils/url";
+import { useProjectSearchParams } from "./until";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
-  const [param, setParam] = useUrlQueryParam(["name", "personId"]);
-  const debounceParam = useDebounce(param, 200);
-  const client = useHttp();
-  const { isLoading, error, data: list } = useProject(debounceParam);
+
+  const [param, setParam] = useProjectSearchParams();
+  const { isLoading, error, data: list } = useProject(useDebounce(param, 200));
   const { data: users } = useUsers();
 
   return (
