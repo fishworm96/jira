@@ -1,17 +1,15 @@
-import { Button, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import { useAuth } from "context/auth-context";
-import React, { FormEvent } from "react";
+import React from "react";
 import { LongButton } from "unauthenticated-app";
 import { useAsync } from "utils/use-async";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export const LoginScreen = ({
   onError,
 }: {
   onError: (error: Error) => void;
 }) => {
-  const { login, user } = useAuth();
+  const { login } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
   const handleSubmit = async (values: {

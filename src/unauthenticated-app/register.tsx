@@ -1,16 +1,14 @@
-import React, { FormEvent } from "react";
+import React from "react";
 import { useAuth } from "context/auth-context";
 import { Button, Form, Input } from "antd";
 import { useAsync } from "utils/use-async";
-
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export const RegisterScreen = ({
   onError,
 }: {
   onError: (error: Error) => void;
 }) => {
-  const { register, user } = useAuth();
+  const { register } = useAuth();
   const { run, isLoading } = useAsync(undefined, { throwOnError: true });
 
   const handleSubmit = async ({
