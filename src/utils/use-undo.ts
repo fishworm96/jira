@@ -11,13 +11,13 @@ export const useUndo = <T>(initialPresent: T) => {
     future: [],
   });
 
-  // const canUndo = state.past.length !== 0
-  // const canRedo = state.future.length !== 0
+  const canUndo = state.past.length !== 0;
+  const canRedo = state.future.length !== 0;
 
   const undo = useCallback(() => {
     setState((currentState) => {
       const { past, present, future } = currentState;
-      if (past.length === 0) return currentState;
+      if (!canUndo) return currentState;
 
       const previous = past[past.length - 1];
       const newPast = past.slice(0, past.length - 1);
@@ -33,7 +33,7 @@ export const useUndo = <T>(initialPresent: T) => {
   const redo = useCallback(() => {
     setState((currentState) => {
       const { past, present, future } = currentState;
-      if (future.length === 0) return currentState;
+      if (!canRedo) return currentState;
 
       const next = future[0];
       const newFuture = future.slice(1);
@@ -68,5 +68,5 @@ export const useUndo = <T>(initialPresent: T) => {
     });
   }, []);
 
-  return [state, { undo, redo, set, reset }];
+  return [state, { undo, redo, set, reset, canUndo, canRedo }];
 };
