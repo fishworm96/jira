@@ -6,11 +6,12 @@ import styled from "@emotion/styled";
 import { Button, Row, Typography } from "antd";
 import { useProject } from "utils/project";
 import { useUsers } from "utils/user";
-import { useProjectSearchParams } from "./until";
+import { useProjectModal, useProjectSearchParams } from "./util";
+import { ButtonNoPadding } from "components/lib";
 
-export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
+export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
-
+  const { open } = useProjectModal();
   const [param, setParam] = useProjectSearchParams();
   const {
     isLoading,
@@ -24,14 +25,15 @@ export const ProjectListScreen = (props: { projectButton: JSX.Element }) => {
     <Container>
       <Row justify="space-between">
         <h1>项目列表</h1>
-        {props.projectButton}
+        <ButtonNoPadding onClick={open} type={"link"}>
+          创建项目
+        </ButtonNoPadding>
       </Row>
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       {error ? (
         <Typography.Text type={"danger"}>{error.message}</Typography.Text>
       ) : null}
       <List
-        projectButton={props.projectButton}
         refresh={retry}
         loading={isLoading}
         users={users || []}
