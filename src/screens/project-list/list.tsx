@@ -4,7 +4,7 @@ import { Pin } from "components/pin";
 import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
-import { useEditProject } from "screens/project";
+import { useEditProject } from "utils/project";
 import { User } from "./search-panel";
 
 export interface Project {
@@ -23,8 +23,7 @@ interface ListProps extends TableProps<Project> {
 
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject();
-  const pinProject = (id: number) => (pin: boolean) =>
-    mutate({ id, pin }).then(props.refresh);
+  const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
   return (
     <Table
       rowKey={"id"}

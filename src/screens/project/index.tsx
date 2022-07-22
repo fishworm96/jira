@@ -1,3 +1,4 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { EpicScreen } from "screens/epic";
@@ -22,38 +23,4 @@ export const ProjectScreen = () => {
       </Routes>
     </div>
   );
-};
-
-export const useEditProject = () => {
-  const { run, ...asyncResult } = useAsync();
-  const client = useHttp();
-  const mutate = (params: Partial<Project>) => {
-    return run(
-      client(`projects/${params.id}`, {
-        data: params,
-        method: "PATCH",
-      })
-    );
-  };
-  return {
-    mutate,
-    ...asyncResult,
-  };
-};
-
-export const useAddProject = () => {
-  const { run, ...asyncResult } = useAsync();
-  const client = useHttp();
-  const mutate = (params: Partial<Project>) => {
-    return run(
-      client(`projects/${params.id}`, {
-        data: params,
-        method: "POST",
-      })
-    );
-  };
-  return {
-    mutate,
-    ...asyncResult,
-  };
 };
