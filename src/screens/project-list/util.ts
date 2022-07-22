@@ -22,9 +22,7 @@ export const useProjectModal = () => {
     "editingProjectId",
   ]);
   const [_, setUrlParams] = useSearchParams();
-  const { data: editingProject, isLoading } = useProject(
-    Number(editingProjectId)
-  );
+  const { data: editingProject, isLoading } = useProject(Number(1));
 
   const open = () => setProjectCreate({ projectCreate: true });
   const close = () => setUrlParams({ projectCreate: "", editingProjectId: "" });
@@ -32,7 +30,7 @@ export const useProjectModal = () => {
     setEditingProjectId({ editingProjectId: id });
 
   return {
-    projectModalOpen: projectCreate === "true",
+    projectModalOpen: projectCreate === "true" || Boolean(editingProjectId),
     open,
     close,
     startEdit,
