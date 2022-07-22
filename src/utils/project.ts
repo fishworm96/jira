@@ -2,7 +2,7 @@ import { Project } from "screens/project-list/list";
 import { useHttp } from "./http";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-export const useProject = (param?: Partial<Project>) => {
+export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
 
   return useQuery<Project[]>(["projects", param], () =>
@@ -31,12 +31,23 @@ export const useAddProject = () => {
 
   return useMutation(
     (params: Partial<Project>) =>
-      client(`projects/${params.id}`, {
+      client(`projects`, {
         data: params,
         method: "POST",
       }),
     {
       onSuccess: () => queryClient.invalidateQueries(["projects"]),
+    }
+  );
+};
+
+export const useProject = (id?: number) => {
+  const client = useHttp();
+  return useQuery<Project>(
+    ["project", { id }],
+    () => client(`projects/${id}`),
+    {
+      enabled: Boolean(id),
     }
   );
 };

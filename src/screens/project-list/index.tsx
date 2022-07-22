@@ -4,7 +4,7 @@ import { List } from "./list";
 import { useDebounce, useDocumentTitle } from "../../utils";
 import styled from "@emotion/styled";
 import { Button, Row, Typography } from "antd";
-import { useProject } from "utils/project";
+import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectSearchParams } from "./util";
 import { ButtonNoPadding, ErrorBox } from "components/lib";
@@ -13,7 +13,7 @@ export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
   const { open } = useProjectModal();
   const [param, setParam] = useProjectSearchParams();
-  const { isLoading, error, data: list } = useProject(useDebounce(param, 200));
+  const { isLoading, error, data: list } = useProjects(useDebounce(param, 200));
   const { data: users } = useUsers();
 
   return (
