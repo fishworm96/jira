@@ -5,17 +5,9 @@ import dayjs from "dayjs";
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDeleteProject, useEditProject } from "utils/project";
-import { User } from "./search-panel";
+import { Project } from "../../types/Project";
+import { User } from "../../types/User";
 import { useProjectModal, useProjectQueryKey } from "./util";
-
-export interface Project {
-  id: number;
-  name: string;
-  personId: number;
-  pin: boolean;
-  organization: string;
-  created: number;
-}
 
 interface ListProps extends TableProps<Project> {
   users: User[];
@@ -24,9 +16,7 @@ interface ListProps extends TableProps<Project> {
 
 export const List = ({ users, ...props }: ListProps) => {
   const { mutate } = useEditProject(useProjectQueryKey());
-  const { startEdit } = useProjectModal();
   const pinProject = (id: number) => (pin: boolean) => mutate({ id, pin });
-  const editProject = (id: number) => () => startEdit(id);
   return (
     <Table
       rowKey={"id"}

@@ -1,4 +1,3 @@
-import { Project } from "screens/project-list/list";
 import { useHttp } from "./http";
 import {
   QueryKey,
@@ -11,6 +10,7 @@ import {
   useDeleteConfig,
   useEditConfig,
 } from "./use-optimistic-options";
+import { Project } from "types/Project";
 
 export const useProjects = (param?: Partial<Project>) => {
   const client = useHttp();
@@ -61,7 +61,7 @@ export const useDeleteProject = (queryKey: QueryKey) => {
 
   return useMutation(
     ({ id }: { id: number }) =>
-      client(`project/${id}`, {
+      client(`projects/${id}`, {
         method: "DELETE",
       }),
     useDeleteConfig(queryKey)
