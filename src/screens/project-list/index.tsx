@@ -7,7 +7,7 @@ import { Button, Row, Typography } from "antd";
 import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectSearchParams } from "./util";
-import { ButtonNoPadding, ErrorBox } from "components/lib";
+import { ButtonNoPadding, ErrorBox, ScreenContainer } from "components/lib";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
@@ -17,7 +17,7 @@ export const ProjectListScreen = () => {
   const { data: users } = useUsers();
 
   return (
-    <Container>
+    <ScreenContainer>
       <Row justify="space-between">
         <h1>项目列表</h1>
         <ButtonNoPadding onClick={open} type={"link"}>
@@ -27,12 +27,8 @@ export const ProjectListScreen = () => {
       <SearchPanel users={users || []} param={param} setParam={setParam} />
       <ErrorBox error={error} />
       <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </Container>
+    </ScreenContainer>
   );
 };
 
 ProjectListScreen.WhyDidYouRedner = false;
-
-const Container = styled.div`
-  padding: 3.2rem;
-`;

@@ -18,9 +18,6 @@ export const useKanbanSearchParams = () => ({
   projectId: useProjectIdInUrl(),
 });
 
-export const useKanbansInProject = () =>
-  useKanbans({ projectId: useProjectIdInUrl() });
-
 export const useKanbanQueryKey = () => ["kanbans", useKanbanSearchParams()];
 
 export const useTasksSearchParams = () => {
