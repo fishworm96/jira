@@ -10,6 +10,7 @@ import { Card } from "antd";
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes();
   const name = taskTypes?.find((taskType) => taskType.id === id)?.name;
+
   if (!name) {
     return null;
   }
@@ -19,7 +20,7 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
   const { data: allTasks } = useTasksInProject();
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
-  console.log(tasks);
+
   return (
     <Container>
       <TaskContainer>
