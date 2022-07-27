@@ -1,11 +1,12 @@
-import React from "react";
-import { Kanban } from "types/kanban";
-import { useTaskTypes } from "utils/task-type";
-import { useTasksInProject } from "./util";
-import taskIcon from "assets/task.svg";
-import bugIcon from "assets/bug.svg";
 import styled from "@emotion/styled";
 import { Card } from "antd";
+import bugIcon from "assets/bug.svg";
+import taskIcon from "assets/task.svg";
+import React from "react";
+import { Kanban } from "types/kanban";
+import { useTasks } from "utils/task";
+import { useTaskTypes } from "utils/task-type";
+import { useTasksSearchParams } from "./util";
 
 const TaskTypeIcon = ({ id }: { id: number }) => {
   const { data: taskTypes } = useTaskTypes();
@@ -18,7 +19,7 @@ const TaskTypeIcon = ({ id }: { id: number }) => {
 };
 
 export const KanbanColumn = ({ kanban }: { kanban: Kanban }) => {
-  const { data: allTasks } = useTasksInProject();
+  const { data: allTasks } = useTasks(useTasksSearchParams());
   const tasks = allTasks?.filter((task) => task.kanbanId === kanban.id);
 
   return (

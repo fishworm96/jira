@@ -1,15 +1,21 @@
 import styled from "@emotion/styled";
 import React from "react";
 import { useDocumentTitle } from "utils";
+import { useKanbans } from "utils/kanban";
 import { KanbanColumn } from "./kanban-column";
 import { SearchPanel } from "./search-pannel";
-import { useKanbansInProject, useProjectInUrl } from "./util";
+import {
+  useKanbanSearchParams,
+  useKanbansInProject,
+  useProjectInUrl,
+  useTasksSearchParams,
+} from "./util";
 
 export const KanbanScreen = () => {
   useDocumentTitle("看板列表");
 
   const { data: currentProject } = useProjectInUrl();
-  const { data: kanbans } = useKanbansInProject();
+  const { data: kanbans } = useKanbans(useKanbanSearchParams());
 
   return (
     <div>
