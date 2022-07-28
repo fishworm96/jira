@@ -18,7 +18,7 @@ export const useKanbanSearchParams = () => ({
   projectId: useProjectIdInUrl(),
 });
 
-export const useKanbanQueryKey = () => ["kanbans", useKanbanSearchParams()];
+export const useKanbansQueryKey = () => ["kanbans", useKanbanSearchParams()];
 
 export const useTasksSearchParams = () => {
   const [param, setParam] = useUrlQueryParam([
@@ -40,5 +40,4 @@ export const useTasksSearchParams = () => {
   );
 };
 
-export const useTasksInProject = () =>
-  useTasks({ projectId: useProjectIdInUrl() });
+export const useTasksQueryKey = () => ["tasks", useTasksSearchParams()];
