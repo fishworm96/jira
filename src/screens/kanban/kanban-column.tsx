@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { Button, Card, Dropdown, Menu, Modal } from "antd";
 import bugIcon from "assets/bug.svg";
 import taskIcon from "assets/task.svg";
+import { Drag, Drop, DropChild } from "components/drag-and-drop";
 import { Row } from "components/lib";
 import { Mark } from "components/mark";
 import React from "react";
@@ -54,14 +55,26 @@ export const KanbanColumn = React.forwardRef<
 
   return (
     <Container {...props} ref={ref}>
+      <Row between={true}>
+        <h3>{kanban.name}</h3>
+        <More kanban={kanban} key={kanban.id} />
+      </Row>
       <TaskContainer>
-        <Row between={true}>
-          <h3>{kanban.name}</h3>
-          <More kanban={kanban} key={kanban.id} />
-        </Row>
-        {tasks?.map((task, index) => (
-          <TaskCard key={task.id} task={task} />
-        ))}
+        <Drop
+          type={"ROW"}
+          direction={"vertical"}
+          droppableId={String(kanban.id)}
+        >
+          <DropChild>
+            {tasks?.map((task, index) => (
+              <Drag key={task.id} index={index} draggableId={"task" + task.id}>
+                <div>
+                  <TaskCard key={task.id} task={task} />
+                </div>
+              </Drag>
+            ))}
+          </DropChild>
+        </Drop>
         <CreateTask kanbanId={kanban.id} />
       </TaskContainer>
     </Container>
