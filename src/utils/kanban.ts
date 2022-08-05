@@ -4,7 +4,7 @@ import { useHttp } from "./http";
 import {
   useAddConfig,
   useDeleteConfig,
-  useReorderConfig,
+  useReorderKanbanConfig,
 } from "./use-optimistic-options";
 
 export const useKanbans = (param?: Partial<Kanban>) => {
@@ -58,5 +58,5 @@ export const useReorderKanban = (QueryKey: QueryKey) => {
       data: params,
       method: "POST",
     });
-  }, useReorderConfig(QueryKey));
+  }, useReorderKanbanConfig(QueryKey));
 };
