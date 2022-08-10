@@ -8,6 +8,7 @@ import { useProjects } from "utils/project";
 import { useUsers } from "utils/user";
 import { useProjectModal, useProjectSearchParams } from "./util";
 import { ButtonNoPadding, ErrorBox, ScreenContainer } from "components/lib";
+import { Profiler } from "components/profiler";
 
 export const ProjectListScreen = () => {
   useDocumentTitle("项目列表", false);
@@ -17,17 +18,19 @@ export const ProjectListScreen = () => {
   const { data: users } = useUsers();
 
   return (
-    <ScreenContainer>
-      <Row justify="space-between">
-        <h1>项目列表</h1>
-        <ButtonNoPadding onClick={open} type={"link"}>
-          创建项目
-        </ButtonNoPadding>
-      </Row>
-      <SearchPanel users={users || []} param={param} setParam={setParam} />
-      <ErrorBox error={error} />
-      <List loading={isLoading} users={users || []} dataSource={list || []} />
-    </ScreenContainer>
+    <Profiler id={"项目列表"}>
+      <ScreenContainer>
+        <Row justify="space-between">
+          <h1>项目列表</h1>
+          <ButtonNoPadding onClick={open} type={"link"}>
+            创建项目
+          </ButtonNoPadding>
+        </Row>
+        <SearchPanel users={users || []} param={param} setParam={setParam} />
+        <ErrorBox error={error} />
+        <List loading={isLoading} users={users || []} dataSource={list || []} />
+      </ScreenContainer>
+    </Profiler>
   );
 };
 
