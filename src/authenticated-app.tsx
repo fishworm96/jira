@@ -98,3 +98,5 @@ const Main = styled.main`
   display: flex;
   overflow: hidden;
 `;
+
+export default AuthenticatedApp;
